@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>킹스맨레이블 실시간 방송 현황</title>
+    <style>
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background-color: #f5f6f8;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        #site-title-image {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            margin: 0 auto 30px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        #live-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .member-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .member-card:hover { transform: translateY(-5px); }
+        .thumbnail {
+            width: 100%;
+            height: 170px;
+            background-color: #ddd;
+            object-fit: cover;
+        }
+        .card-info { padding: 15px; text-align: left; }
+        
+        .channel-info-container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            clear: both;
+        }
+        .channel-name { font-size: 18px; font-weight: bold; }
+        .video-title { font-size: 14px; color: #555; margin-bottom: 15px; height: 40px; overflow: hidden; }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+            float: left;
+        }
+        .live-on { background-color: #ff0000; animation: blink 1.5s infinite; }
+        .live-off { background-color: #888; }
+        .watch-btn {
+            display: block;
+            background-color: #ff0000;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+        @keyframes blink { 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body>
+    <img src="kingsman_label.PNG" id="site-title-image" alt="Kingsman Label - Live Broadcasting Status Check">
+    
+    <div id="live-container">
+        <p>우리 서버에서 16명의 멤버 상태를 안전하게 확인 중입니다... 🚀</p>
+    </div>
+
+    <script>
+        const container = document.getElementById('live-container');
+
+        const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+
+        function createOfflineCardHtml(member) {
+            return `
+                <div class="member-card" style="opacity: 0.6; ${member.isFixed ? 'border: 1px dashed #bba155;' : ''}">
+                    <div class="thumbnail" style="display:flex; justify-content:center; align-items:center; color:#999; background-color:#e9ecef; font-weight:bold;">
+                        💤 방송 쉬는 중
+                    </div>
+                    <div class="card-info">
+                        <div class="status-badge live-off">OFFLINE</div>
+                        <div class="channel-info-container">
+                            <div class="channel-name">${member.name}</div>
+                        </div>
+                        <div class="video-title">현재 진행 중인 라이브 방송이 없습니다.</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createLiveCardHtml(member) {
+            return `
+                <div class="member-card" ${member.isFixed ? 'style="border: 2px solid #bba155;' : ''}">
+                    <img src="${member.thumbUrl}" class="thumbnail" alt="썸네일">
+                    <div class="card-info">
+                        <div class="status-badge live-on">🔴 LIVE</div>
+                        <div class="channel-info-container">
+                            <div class="channel-name">${member.name}</div>
+                        </div>
+                        <div class="video-title">${member.title}</div>
+                        <a href="https://www.youtube.com/watch?v=${member.videoId}" target="_blank" class="watch-btn">방송 보러가기</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        const fetchFromServer = async () => {
+            try {
+                const response = await fetch('/api/live-status');
+                const membersData = await response.json();
+
+                const fixedMember = membersData.find(m => m.isFixed);
+                const otherMembers = membersData.filter(m => !m.isFixed);
+                
+                shuffleArray(otherMembers);
+                otherMembers.sort((a, b) => b.isLive - a.isLive);
+
+                let finalHTML = '';
+                
+                if (fixedMember) {
+                    finalHTML += fixedMember.isLive ? createLiveCardHtml(fixedMember) : createOfflineCardHtml(fixedMember);
+                }
+
+                for (const member of otherMembers) {
+                    finalHTML += member.isLive ? createLiveCardHtml(member) : createOfflineCardHtml(member);
+                }
+
+                container.innerHTML = finalHTML;
+
+            } catch (error) {
+                console.error("서버와 통신 실패:", error);
+                container.innerHTML = "<h3>서버와 연결할 수 없습니다. 터미널에서 node server.js 가 켜져 있는지 확인해 주세요! 😭</h3>";
+            }
+        };
+
+        fetchFromServer();
+    </script>
+</body>
+</html>
