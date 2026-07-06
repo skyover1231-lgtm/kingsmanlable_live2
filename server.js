@@ -10,22 +10,24 @@ const API_KEY = 'AIzaSyCVqkPF2-XgtcuaW7qlAfrILTsYdTDrk0c';
 
 // 오직 진짜 멤버 16명만 남은 깔끔한 명단입니다!
 const members = [
-    { name: "김인환 대표님", id: "UC1B9SsfgCoOBlX4KU1eA_WA", isFixed: true },
-    { name: "김혁", id: "UC3UKBF6jTpoPH65w5wzg80g", isFixed: false },
-    { name: "여운", id: "UCMBuA0M8UnGkj82whDYWBDw", isFixed: false },
-    { name: "이신우", id: "UCFlqjyz1C7khLh_cHVaWuvw", isFixed: false },
-    { name: "강대호", id: "UCgLxSBFLmPnLbUkBXZpQiSA", isFixed: false },
-    { name: "차유현", id: "UCHv64fI_DmPRFFPBI2VxnRw", isFixed: false },
-    { name: "환", id: "UCGiB_G92IXI5im2PNg2f2Yw", isFixed: false },
-    { name: "건리버", id: "UClGYjcolB4Q_IxlGgRM8zTg", isFixed: false },
-    { name: "이강유", id: "UCV7bzTsAx2wOgC2oGQL9ngA", isFixed: false },
-    { name: "권우빈", id: "UCbHo8G-J874FHyGcpgn0_7w", isFixed: false },
-    { name: "성준", id: "UCTsKA_kkLEWFO60VJoG0r-w", isFixed: false },
-    { name: "조성빈", id: "UCFd6y1h3EEDzjL_f7nYDepg", isFixed: false },
-    { name: "안재현", id: "UCQXtfhG3S0aa7f7f230s9qQ", isFixed: false },
-    { name: "천우", id: "UCViKwH--dgPkGcydqqt-jDA", isFixed: false },
-    { name: "도일", id: "UCQDAyvoteXG9NbiCp0qvftg", isFixed: false },
-    { name: "이준", id: "UCrpF73OTLavqN87jw5hi0Rg", isFixed: false }
+    { name: "심가을 대표님", id: "UCdgGYzOCehIeirGdyfrqVvQ", isFixed: true },
+    { name: "채수빈", id: "UCQ7EA5OOmBGICxLVko9GcIg", isFixed: false },
+    { name: "연준", id: "UCCagjiCDkSWCjAQU3CjYahw", isFixed: false },
+    { name: "박시울", id: "UCR01hU0e7ugHP7WHgFlC30g", isFixed: false },
+    { name: "김선재", id: "UC6dHUvwtv9tmz9loMCiYKXg", isFixed: false },
+    { name: "유동건", id: "UCBW9_nl-mDNIykX182Xzq6w", isFixed: false },
+    { name: "최시훈", id: "UC-uPo6c4zgV6qbIMQjSvIfw", isFixed: false },
+    { name: "구니스", id: "UCPa1OhAUj2_qSkyTHFEFz8g", isFixed: false },
+    { name: "준호", id: "UCTSTQPpTWvvav4sSyYkSkew", isFixed: false },
+    { name: "우혁", id: "UCUNS9M5-6U1By_yPGXmaf0g", isFixed: false },
+    { name: "백도현", id: "UC9PlC5g67fFlDn4DO_3lr7w", isFixed: false },
+    { name: "서준", id: "UC2RbrYhQFIUANNJwEIhnilw", isFixed: false },
+    { name: "백현준", id: "UCzYsV4Cu2qYGsx0WW2GbaHA", isFixed: false },
+    { name: "차선호DAISKI♥", id: "UC-fAFNoIebLPDUlMWY3P6oA", isFixed: false },
+    { name: "루빈", id: "UCL3Upa2xdndT1SWWYj_PhbA", isFixed: false },
+    { name: "윤유준", id: "UCvQ5AIKf-tYvWwo9DZf0CJA", isFixed: false }
+    { name: "태민", id: "UCbe-jMZu1XzvBmY845ppvJA", isFixed: false }
+    { name: "성찬", id: "UCvZB4kRvnQIrZtpDwupz_uA", isFixed: false }
 ];
 
 let cachedResults = [];
