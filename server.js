@@ -25,9 +25,9 @@ const members = [
     { name: "백현준", id: "UCzYsV4Cu2qYGsx0WW2GbaHA", isFixed: false },
     { name: "차선호DAISKI♥", id: "UC-fAFNoIebLPDUlMWY3P6oA", isFixed: false },
     { name: "루빈", id: "UCL3Upa2xdndT1SWWYj_PhbA", isFixed: false },
-    { name: "윤유준", id: "UCvQ5AIKf-tYvWwo9DZf0CJA", isFixed: false }
-    { name: "태민", id: "UCbe-jMZu1XzvBmY845ppvJA", isFixed: false }
-    { name: "성찬", id: "UCvZB4kRvnQIrZtpDwupz_uA", isFixed: false }
+    { name: "윤유준", id: "UCvQ5AIKf-tYvWwo9DZf0CJA", isFixed: false },
+    { name: "태민", id: "UCbe-jMZu1XzvBmY845ppvJA", isFixed: false },
+    { name: "성찬", id: "UCvZB4kRvnQIrZtpDwupz_uA", isFixed: false },
 ];
 
 let cachedResults = [];
